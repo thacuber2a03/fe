@@ -1,5 +1,6 @@
 /*
 ** Copyright (c) 2020 rxi
+**               2026 @thacuber2a03
 **
 ** Permission is hereby granted, free of charge, to any person obtaining a copy
 ** of this software and associated documentation files (the "Software"), to
@@ -42,14 +43,14 @@
 
 enum {
  P_LET, P_SET, P_IF, P_FN, P_MAC, P_WHILE, P_QUOTE, P_AND, P_OR, P_DO, P_CONS,
- P_CAR, P_CDR, P_SETCAR, P_SETCDR, P_LIST, P_NOT, P_IS, P_ATOM, P_PRINT, P_LT,
- P_LTE, P_ADD, P_SUB, P_MUL, P_DIV, P_MAX
+ P_CAR, P_CDR, P_SETCAR, P_SETCDR, P_LIST, P_NOT, P_IS, P_ATOM, P_TYPE, P_EVAL,
+ P_PRINT, P_LT, P_LTE, P_ADD, P_SUB, P_MUL, P_DIV, P_MAX
 };
 
 static const char *primnames[] = {
   "let", "=", "if", "fn", "mac", "while", "quote", "and", "or", "do", "cons",
-  "car", "cdr", "setcar", "setcdr", "list", "not", "is", "atom", "print", "<",
-  "<=", "+", "-", "*", "/"
+  "car", "cdr", "setcar", "setcdr", "list", "not", "is", "atom", "type", "eval",
+  "print", "<", "<=", "+", "-", "*", "/"
 };
 
 static const char *typenames[] = {
@@ -726,6 +727,13 @@ static fe_Object* eval(fe_Context *ctx, fe_Object *obj, fe_Object *env, fe_Objec
 
         case P_ATOM:
           res = fe_bool(ctx, fe_type(ctx, evalarg()) != FE_TPAIR);
+          break;
+
+        case P_EVAL:
+          return eval(ctx, evalarg(), env, NULL);
+
+        case P_TYPE:
+          res = fe_string(ctx, typenames[fe_type(ctx, evalarg())]);
           break;
 
         case P_PRINT:

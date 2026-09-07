@@ -1,5 +1,6 @@
 /*
 ** Copyright (c) 2020 rxi
+**               2026 @thacuber2a03
 **
 ** This library is free software; you can redistribute it and/or modify it
 ** under the terms of the MIT license. See `fe.c` for details.
