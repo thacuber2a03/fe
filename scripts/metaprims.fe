@@ -1,5 +1,5 @@
 (do
-  (let add (fn (a) (fn (b) (eval (+ a b)))))
+  (let add (fn (a) (fn (b) (eval (cons '+ (list a b))))))
 
   (let increment (add 1))
   (print (increment 2))
