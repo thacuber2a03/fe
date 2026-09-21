@@ -1,9 +1,7 @@
 (do
-  (let add (fn (a) (fn (b) (eval (cons '+ (list a b))))))
-
-  (let increment (add 1))
-  (print (increment 2))
-  (print (increment 5))
+  (let y 10)
+  (let x 'y)
+  (print (eval x))
 
   (print (type "string"))
   (print (type '(1 2 3 4)))
