@@ -71,6 +71,18 @@ Returns `val` unevaluated.
 (hello world)
 ```
 
+##### (eval x)
+Evaluates `x`, and then evaluates the result of that.
+
+```clojure
+> (= y 10)
+nil
+> (= x 'y)
+nil
+> (eval x)
+10
+```
+
 ##### (and ...)
 Evaluates each argument until one results in `nil` — the last argument's value
 is returned if all the arguments are true.
@@ -119,6 +131,20 @@ underlying object.
 
 ##### (atom x)
 Returns true if `x` is not a pair, otherwise `nil`.
+
+##### (type x)
+Returns a more precise representation of the type of `x` as a symbol.
+
+This symbol can be one of `pair`, `nil`, `number`, `symbol`, `string`, `func`, `macro`, `prim`, `cfunc` or `ptr`.
+
+```clojure
+> (type "foo")
+string
+> (type '(1 2 3 4))
+list
+> (type (fn (x) (* x x)))
+func
+```
 
 ##### (print ...)
 Prints all it's arguments to `stdout`, each separated by a space and followed by
