@@ -733,7 +733,7 @@ static fe_Object* eval(fe_Context *ctx, fe_Object *obj, fe_Object *env, fe_Objec
           return eval(ctx, evalarg(), env, NULL);
 
         case P_TYPE:
-          res = fe_string(ctx, typenames[fe_type(ctx, evalarg())]);
+          res = fe_symbol(ctx, typenames[fe_type(ctx, evalarg())]);
           break;
 
         case P_PRINT:
