@@ -5,4 +5,6 @@
 
   (print (type "string"))
   (print (type '(1 2 3 4)))
-  (print (type (fn (x) (* x x)))))
+  (print (type (fn (x) (* x x))))
+
+  (print "\xc3\xb1"))

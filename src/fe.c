@@ -515,6 +515,18 @@ static fe_Object* read_(fe_Context *ctx, fe_ReadFn fn, void *udata) {
         if (chr == '\\') {
           chr = fn(ctx, udata);
           if (strchr("nrt", chr)) { chr = strchr("n\nr\rt\t", chr)[1]; }
+          if (chr == 'x') {
+            buf[0] = fn(ctx, udata);
+            buf[1] = fn(ctx, udata);
+            buf[2] = '\0';
+            chr = strtoul(buf, &p, 16);
+
+            if (p != buf + 2)
+              fe_error(ctx, "invalid hex escape in string");
+
+            /* account for implementation limitation */
+            if (!chr) fe_error(ctx, "can't embed NUL byte on string");
+          }
         }
         v = buildstring(ctx, v, chr);
         chr = fn(ctx, udata);
